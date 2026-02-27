@@ -1,0 +1,119 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class LibrarySystem {
+protected:
+    string Title, Author;
+    int ID;
+};
+
+class Book : public LibrarySystem {
+private:
+    int TotalPages;
+    string Genre;
+
+public:
+    void SetValues(string Tittle, string Auther, int id, int totalPages, string genre) {
+        Title = Tittle;
+        Author = Auther;
+        ID = id;
+        TotalPages = totalPages;
+        Genre = genre;
+    }
+
+    void DisplayDetails() {
+        cout << "Title: " << Title << endl
+             << "Author: " << Author << endl
+             << "ID: " << ID << endl
+             << "Total Pages: " << TotalPages << endl
+             << "Genre: " << Genre << endl;
+    }
+};
+
+class Magazine : public LibrarySystem {
+private:
+    int IssueNumber;
+    string MonthOfPub;
+
+public:
+    void SetValues(string Tittle, string Auther, int id, int issueNumber, string monthOfPub) {
+        Title = Tittle;
+        Author = Auther;
+        ID = id;
+        IssueNumber = issueNumber;
+        MonthOfPub = monthOfPub;
+    }
+
+    void DisplayDetails() {
+        cout << "Title: " << Title << endl
+             << "Author: " << Author << endl
+             << "ID: " << ID << endl
+             << "Issue Number: " << IssueNumber << endl
+             << "Month of publication: " << MonthOfPub << endl;
+    }
+};
+
+class AudioBook : public LibrarySystem {
+private:
+    int DurationInSeconds;
+    string NaratorName;
+
+public:
+    void SetValues(string Tittle, string Auther, int id, int durationInSeconds, string naratorName) {
+        Title = Tittle;
+        Author = Auther;
+        ID = id;
+        DurationInSeconds = durationInSeconds;
+        NaratorName = naratorName;
+    }
+
+    void DisplayDetails() {
+        cout << "Title: " << Title << endl
+             << "Author: " << Author << endl
+             << "ID: " << ID << endl
+             << "Length in sec: " << DurationInSeconds << endl
+             << "Narator Name: " << NaratorName << endl;
+    }
+};
+
+int main() {
+    Book book1;
+    book1.SetValues("Clean Code", "Ahmad", 201, 464, "Software Engineering");
+
+    Book book2;
+    book2.SetValues("Programmer", "Ali", 305, 352, "Software Development");
+
+    Magazine magazine1;
+    magazine1.SetValues("AI", "Abdul", 410, 60, "February");
+
+    Magazine magazine2;
+    magazine2.SetValues("Code", "jack", 512, 75, "April");
+
+    AudioBook audioBook1;
+    audioBook1.SetValues("Habits", "qaid", 601, 18000, "John Smith");
+
+    AudioBook audioBook2;
+    audioBook2.SetValues("The Power", "imran", 710, 22000, "Emma Brown");
+
+    cout << "\nBook Details\n";
+    book1.DisplayDetails();
+
+    cout << "\nBook Details\n";
+    book2.DisplayDetails();
+
+    cout << "\nMagazine Details\n";
+    magazine1.DisplayDetails();
+
+    cout << "\nMagazine Details\n";
+    magazine2.DisplayDetails();
+
+    cout << "\nAudioBook Details\n";
+    audioBook1.DisplayDetails();
+
+    cout << "\nAudioBook Details\n";
+    audioBook2.DisplayDetails();
+
+    return 0;
+}
