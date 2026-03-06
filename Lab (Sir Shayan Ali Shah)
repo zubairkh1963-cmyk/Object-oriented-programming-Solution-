@@ -1,0 +1,46 @@
+#include<iostream>
+
+using namespace std;
+
+class smartDelivery
+{
+	protected:
+		int uniqueId;
+		double deliveryCost;
+		string customerName;
+		
+	public:
+	
+	void display(int uniqueId, double deliveryCost, string customerName)
+	{
+		
+		cout<<"Smart Delivery Type:"<<endl;
+		cout<<"Delivery Unique ID: "<<uniqueId<<endl;
+		cout<<"Total Delivery Cost: "<<deliveryCost<<endl;
+		cout<<"Customer Name: "	<<customerName<<endl;
+	}	
+};
+
+class expressDelivery: public smartDelivery
+{
+	
+	public:
+		using smartDelivery::display;
+		void display(int uniqueId, double deliveryCost, string customerName, string priorityLevel)
+		{
+			cout<<"\nExpress Delivery Type:"<<endl;
+			cout<<"Delivery Unique ID: "<<uniqueId<<endl;
+			cout<<"Total Delivery Cost: "<<deliveryCost<<endl;
+			cout<<"Customer Name: "	<<customerName<<endl;
+			cout<<"Priority Level: "<<priorityLevel<<endl;
+		}
+	
+};
+
+int main()
+{
+	expressDelivery ED;
+	ED.display(101, 850.5, "Ali");
+	ED.display(101, 850.5, "Ali", "High");
+	
+}
