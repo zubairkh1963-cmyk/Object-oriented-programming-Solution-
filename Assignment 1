@@ -1,0 +1,188 @@
+#include <iostream>
+using namespace std;
+
+
+class Hero {
+protected:
+    string name;
+    string type;
+    int health;
+    int power;
+    int experience;
+
+public:
+    Hero(string n, string t, int h, int p, int e) {
+        name = n;
+        type = t;
+        health = h;
+        power = p;
+        experience = e;
+    }
+
+    
+    void Message() {
+        cout << "\n=== Welcome to the Battle Arena Game ===\n";
+        cout << "\nA New Adventure Begain.... Are you Ready \n";
+        cout << "\n The Fate of the Realm Lies in Your Hand\n";
+        cout << "\nHERO..\n";
+    }
+
+    
+    virtual double attack() = 0;
+    virtual double defend() = 0;
+
+    virtual void display() {
+        cout << "\nHero Name: " << name;
+        cout << "\nType: " << type;
+        cout << "\nHealth: " << health;
+        cout << "\nPower: " << power;
+        cout << "\nExperience: " << experience << endl;
+    }
+};
+
+
+class Warrior : public Hero {
+private:
+    string weaponName;
+    int armor;
+    int rage;
+
+public:
+    Warrior(string n, int h, int p, int e,
+            string w, int a, int r)
+        : Hero(n, "Warrior", h, p, e) {
+        weaponName = w;
+        armor = a;
+        rage = r;
+    }
+
+    double attack() {
+        return power * 1.5 + rage * 2;
+    }
+
+    double defend() {
+        return armor * 1.8 + health * 0.2;
+    }
+
+    void display() {
+        Hero::display();
+        cout << "Weapon: " << weaponName << endl;
+        cout << "Armor Strength: " << armor << endl;
+        cout << "Rage Level: " << rage << endl;
+    }
+};
+
+
+class Mage : public Hero {
+private:
+    string skillName;
+    int magicEnergy;
+    double powerMultiplier;
+
+public:
+    Mage(string n, int h, int p, int e,
+         string s, int m, double pm)
+        : Hero(n, "Mage", h, p, e) {
+        skillName = s;
+        magicEnergy = m;
+        powerMultiplier = pm;
+    }
+
+    double attack() {
+        return power * powerMultiplier + magicEnergy * 1.2;
+    }
+
+    double defend() {
+        return magicEnergy * 1.5 + health * 0.3;
+    }
+
+    void display() {
+        Hero::display();
+        cout << "Skill: " << skillName << endl;
+        cout << "Magic Energy: " << magicEnergy << endl;
+        cout << "Power Multiplier: " << powerMultiplier << endl;
+    }
+};
+
+
+class Archer : public Hero {
+private:
+    string bowType;
+    int arrows;
+    double accuracy;
+
+public:
+    Archer(string n, int h, int p, int e,
+           string b, int ar, double acc)
+        : Hero(n, "Archer", h, p, e) {
+        bowType = b;
+        arrows = ar;
+        accuracy = acc;
+    }
+
+    double attack() {
+        return power * accuracy + arrows * 0.5;
+    }
+
+    double defend() {
+        return accuracy * 50 + health * 0.2;
+    }
+
+    void display() {
+        Hero::display();
+        cout << "Bow Type: " << bowType << endl;
+        cout << "Arrows: " << arrows << endl;
+        cout << "Accuracy: " << accuracy << endl;
+    }
+};
+
+
+int main() {
+
+    Warrior w("Musawir", 120, 80, 50, "Sword", 70, 40);
+    Mage m("Owais", 100, 60, 80, "Lightning", 90, 2.5);
+    Archer a("Shayan", 110, 70, 60, "Swiftbow", 50, 1.8);
+
+    w.Message();
+
+    
+    cout << "\n------ Warrior Information ------";
+    w.display();
+    double wAttack = w.attack();
+    double wDefense = w.defend();
+    cout << "Attack: " << wAttack << endl;
+    cout << "Defense: " << wDefense << endl;
+
+    cout << "\n------ Mage Information ------";
+    m.display();
+    double mAttack = m.attack();
+    double mDefense = m.defend();
+    cout << "Attack: " << mAttack << endl;
+    cout << "Defense: " << mDefense << endl;
+
+    cout << "\n------ Archer Information ------";
+    a.display();
+    double aAttack = a.attack();
+    double aDefense = a.defend();
+    cout << "Attack: " << aAttack << endl;
+    cout << "Defense: " << aDefense << endl;
+
+    
+    cout << "====== Battle Summary ======\n";
+
+    double maxAttack = wAttack;
+    string bestHero = "Warrior";
+
+    if (mAttack > maxAttack) {
+        maxAttack = mAttack;
+        bestHero = "Mage";
+    }
+    if (aAttack > maxAttack) {
+        maxAttack = aAttack;
+        bestHero = "Archer";
+    }
+
+    cout << "Highest Attack Hero is: " << bestHero << endl;
+
+    return 0;
+}
